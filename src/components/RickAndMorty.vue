@@ -1,6 +1,10 @@
 <template>
-    <b-container >
-        <b-row style="overflow-x:scroll;overflow-y:hidden; max-height:510px;" class="flex-nowrap">
+    <b-container 
+        class="border border-primary"
+        id="contenedor" >
+        <b-row 
+            id="personajes_container"
+            style="overflow-x:scroll;overflow-y:hidden; max-height:510px;" class="flex-nowrap">
             <b-col 
                 v-for="(item,index) in items" 
                 :key="index"
@@ -25,6 +29,7 @@
             </b-col>
         </b-row>
         <b-pagination
+            class="mt-3"
             v-model="pagination.currentPage"
             :total-rows="pagination.count"
             :per-page="20"
@@ -73,5 +78,13 @@ li{
 .card-body{
     padding:0 !important;
     margin-top:10px !important;
+}
+#contenedor{
+    width: 1600px;
+    padding: 30px 40px;
+    border-radius: 25px;
+}
+.personajes_container{
+    width: 1598px;
 }
 </style>
