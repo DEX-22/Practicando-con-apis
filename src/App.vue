@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <rick-and-morty />
+    <rick-and-morty /> 
+    <dolar-graph />
   </div>
 </template>
 
 <script>
+import DolarGraph from './components/DolarGraph.vue'
 import RickAndMorty from './components/RickAndMorty.vue'
 
 export default {
   name: 'App',
   components: {
-    RickAndMorty
+    RickAndMorty,
+    DolarGraph
+
   }
 }
 </script>

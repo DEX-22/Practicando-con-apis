@@ -4,9 +4,9 @@
         id="contenedor" >
         <b-row 
             id="personajes_container"
-            style="overflow-x:scroll;overflow-y:hidden; max-height:510px;" class="flex-nowrap">
+            style="" class="flex-nowrap">
             <b-col 
-                v-for="(item,index) in items" 
+                v-for="(item,index) in characters" 
                 :key="index"
                 >
                 <b-card 
@@ -26,7 +26,7 @@
                         </b-card-text>
                     </b-card-body>
                 </b-card>
-            </b-col>
+            </b-col><button></button>
         </b-row>
         <b-pagination
             class="mt-3"
@@ -35,36 +35,38 @@
             :per-page="20"
             pills>
                 <template #first-text>
-                    <a :href="firstPage"> First </a>
+                    <!-- <a :href="firstPage"> First </a> -->
                 </template>
                 <template #prev-text>
-                    <a :href="pagination.prev"> First </a>
+                    <!-- <a :href="pagination.prev"> First </a> -->
                 </template>
                 <template #next-text>
-                    <a :href="pagination.next"> Last </a>
+                    <!-- <a :href="pagination.next"> Last </a> -->
                 </template>
                 <template #last-text>
-                    <a :href="lastPage"> Last </a>
+                    <!-- <a :href="lastPage"> Last </a> -->
                 </template>
         </b-pagination>
     </b-container>
 
 </template>
 <script>
-import RickAndMortyService from '@/services/RickAndMorty.service'
-
+import RickAndMortyProvider from '@/providers/RickAndMorty.provider'
 export default{
     data(){return {
         items: [],
         pagination:{},
-        firstPage: 'https://rickandmortyapi.com/api/character?page=1',
-        lastPage: 'https://rickandmortyapi.com/api/character?page=42',
-
+        characters:[],
     }},
+    methods:{
+        async start(){
+           const characters_pagination = await RickAndMortyProvider.charactersProvider()
+            this.pagination = characters_pagination.pagination
+            this.characters = characters_pagination.characters
+        },
+    },
     async created(){
-        let info = await RickAndMortyService.getPersons()
-        this.items = info.results
-        this.pagination = {...info.info}
+        
     }
 }
 </script>
@@ -86,5 +88,8 @@ li{
 }
 .personajes_container{
     width: 1598px;
+    overflow-x:scroll;
+    overflow-y:hidden; 
+    max-height:510px;
 }
 </style>
